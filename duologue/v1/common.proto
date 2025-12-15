@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+// ==========================================
+// Common Types
+// ==========================================
+
+// Error represents a standardized error response.
+message Error {
+  string code = 1;
+  string message = 2;
+  map<string, string> details = 3;
+}
+
+// PaginationRequest represents standard pagination parameters.
+message PaginationRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+// PaginationResponse represents standard pagination metadata.
+message PaginationResponse {
+  int32 total_count = 1;
+  int32 total_pages = 2;
+  string next_page_token = 3;
+}
+
+// Date represents a whole calendar date, e.g. date of birth.
+message Date {
+  int32 year = 1;
+  int32 month = 2;
+  int32 day = 3;
+}
