@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+import "duologue/v1/common.proto";
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+// ==========================================
+// Auth Service
+// ==========================================
+
+service AuthService {
+  // Signup
+  rpc RequestSignup(RequestSignupRequest) returns (RequestSignupResponse);
+  rpc VerifySignup(VerifySignupRequest) returns (VerifySignupResponse);
+
+  // Login
+  rpc RequestLogin(RequestLoginRequest) returns (RequestLoginResponse);
+  rpc VerifyLogin(VerifyLoginRequest) returns (VerifyLoginResponse);
+
+  // Token Management
+  rpc RefreshAccessToken(RefreshAccessTokenRequest) returns (RefreshAccessTokenResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+
+  // User Info
+  rpc GetMe(GetMeRequest) returns (GetMeResponse);
+}
+
+// ==========================================
+// Messages
+// ==========================================
+
+// --- Signup ---
+message RequestSignupRequest {
+  string email = 1;
+}
+
+message RequestSignupResponse {
+  string message = 1;
+}
+
+message VerifySignupRequest {
+  string email = 1;
+  string code = 2;
+}
+
+message VerifySignupResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  // User info can be added here if needed immediately after signup
+}
+
+// --- Login ---
+message RequestLoginRequest {
+  string email = 1;
+}
+
+message RequestLoginResponse {
+  string message = 1;
+}
+
+message VerifyLoginRequest {
+  string email = 1;
+  string code = 2;
+}
+
+message VerifyLoginResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+// --- Token ---
+message RefreshAccessTokenRequest {
+  string refresh_token = 1;
+}
+
+message RefreshAccessTokenResponse {
+  string access_token = 1;
+}
+
+message LogoutRequest {
+  string refresh_token = 1;
+}
+
+message LogoutResponse {
+  string message = 1;
+}
+
+// --- Me ---
+message GetMeRequest {
+  // Empty request, uses Authorization header
+}
+
+message GetMeResponse {
+  int64 user_id = 1;
+  string email = 2;
+  // Add other basic user info as needed
+}
