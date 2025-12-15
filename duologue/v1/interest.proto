@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+// ==========================================
+// Interest Service
+// ==========================================
+
+service InterestService {
+  // GetInterests returns a list of available interests (tags).
+  rpc GetInterests(GetInterestsRequest) returns (GetInterestsResponse);
+}
+
+// ==========================================
+// Messages
+// ==========================================
+
+message Interest {
+  int32 id = 1;
+  string key = 2;
+  string display_name = 3;
+  string category_key = 4;
+  string category_display_name = 5;
+}
+
+message GetInterestsRequest {
+  // No parameters needed for now
+}
+
+message GetInterestsResponse {
+  repeated Interest interests = 1;
+}
