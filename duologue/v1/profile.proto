@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+import "header/v1/header.proto";
+
+import "duologue/v1/interest.proto";
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+service ProfileService {
+  rpc GetMyProfile(GetMyProfileRequest) returns (GetMyProfileResponse);
+  rpc UpdateMyProfile(UpdateMyProfileRequest) returns (UpdateMyProfileResponse);
+  rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+  rpc CheckNickname(CheckNicknameRequest) returns (CheckNicknameResponse);
+}
+
+message GetMyProfileRequest {}
+
+message GetMyProfileResponse {
+  Profile profile = 1;
+}
+
+message UpdateMyProfileRequest {
+  optional string nickname = 1;
+  optional string profile_image_url = 2;
+  optional string gender = 3;
+  optional string short_bio = 4;
+  optional string region = 5;
+  repeated int64 interest_ids = 6;
+}
+
+message UpdateMyProfileResponse {
+  Profile profile = 1;
+}
+
+message GetUserProfileRequest {
+  int64 user_id = 1;
+}
+
+message GetUserProfileResponse {
+  PublicProfile profile = 1;
+}
+
+message CheckNicknameRequest {
+  string nickname = 1;
+}
+
+message CheckNicknameResponse {
+  bool available = 1;
+}
+
+message Profile {
+  int64 user_id = 1;
+  optional string nickname = 2;
+  optional string profile_image_url = 3;
+  int32 level = 4;
+  optional string gender = 5;
+  optional string short_bio = 6;
+  optional string region = 7;
+  repeated Interest interests = 8;
+  // CreatedAt, UpdatedAt if needed
+}
+
+message PublicProfile {
+  int64 user_id = 1;
+  optional string nickname = 2;
+  optional string profile_image_url = 3;
+  optional string short_bio = 4;
+  int32 level = 5;
+}
