@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+import "duologue/v1/profile.proto";
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+// ==========================================
+// Root Envelope
+// ==========================================
+
+message WSEvent {
+  oneof domain {
+    SystemEvent system = 1;
+    MatchingEvent matching = 2;
+    // GameEvent game = 3; // Future extension
+  }
+}
+
+// ==========================================
+// Domain: System (Auth, Error, Ping)
+// ==========================================
+
+message SystemEvent {
+  oneof event {
+    // Client -> Server
+    AuthRequest auth_request = 1;
+    PingEvent ping = 2;
+
+    // Server -> Client
+    AuthResponse auth_response = 10;
+    ErrorEvent error = 11;
+    PongEvent pong = 12;
+  }
+}
+
+message AuthRequest {
+  string token = 1;
+}
+
+message AuthResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message ErrorEvent {
+  string code = 1;
+  string message = 2;
+}
+
+message PingEvent {}
+message PongEvent {}
+
+// ==========================================
+// Domain: Matching
+// ==========================================
+
+message MatchingEvent {
+  oneof event {
+    // Client -> Server
+    JoinQueueRequest join_queue = 1;
+    LeaveQueueRequest leave_queue = 2;
+    MatchActionRequest accept_match = 3;
+    MatchActionRequest reject_match = 4;
+
+    // Server -> Client
+    QueueJoinedEvent queue_joined = 10;
+    QueueLeftEvent queue_left = 11;
+    MatchFoundEvent match_found = 12;
+    MatchStatusEvent match_status = 13;
+    QueueStatusEvent queue_status = 14;
+    ExpansionChangedEvent expansion_changed = 15;
+  }
+}
+
+// --- Matching Payload Definitions ---
+
+message JoinQueueRequest {
+  optional int32 min_age = 1;
+  optional int32 max_age = 2;
+  string gender = 3;
+  string region = 4;
+  repeated int64 interest_ids = 5;
+}
+
+message LeaveQueueRequest {}
+
+message MatchActionRequest {
+  int64 match_id = 1;
+}
+
+message QueueJoinedEvent {}
+message QueueLeftEvent {}
+
+message MatchFoundEvent {
+  int64 match_id = 1;
+  PublicProfile partner = 2;
+  int32 expires_in = 3;
+}
+
+message MatchStatusEvent {
+  int64 match_id = 1;
+  string status = 2; // "success", "failed", "rejected"
+  string reason = 3;
+}
+
+message QueueStatusEvent {
+  int32 position = 1;
+  int32 estimated_wait = 2;
+}
+
+message ExpansionChangedEvent {
+  int32 previous_level = 1;
+  int32 current_level = 2;
+  string code = 3;
+  int32 estimated_wait = 4;
+}

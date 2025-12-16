@@ -68,4 +68,8 @@ message PublicProfile {
   optional string profile_image_url = 3;
   optional string short_bio = 4;
   int32 level = 5;
+  int32 age = 6;
+  optional string gender = 7;
+  optional string region = 8;
+  repeated Interest interests = 9;
 }
