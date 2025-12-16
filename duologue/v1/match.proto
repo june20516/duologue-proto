@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+import "google/protobuf/timestamp.proto";
+import "duologue/v1/profile.proto";
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+service MatchService {
+  rpc GetMyMatches(GetMyMatchesRequest) returns (GetMyMatchesResponse);
+  rpc GetMatch(GetMatchRequest) returns (GetMatchResponse);
+  rpc DeleteMatch(DeleteMatchRequest) returns (DeleteMatchResponse);
+}
+
+message GetMyMatchesRequest {}
+
+message GetMyMatchesResponse {
+  repeated MatchDetail matches = 1;
+}
+
+message GetMatchRequest {
+  int64 match_id = 1;
+}
+
+message GetMatchResponse {
+  MatchDetail match = 1;
+}
+
+message DeleteMatchRequest {
+  int64 match_id = 1;
+}
+
+message DeleteMatchResponse {}
+
+message MatchDetail {
+  int64 id = 1;
+  PublicProfile partner = 2;
+  string status = 3;
+  string intimacy_status = 4;
+  int32 play_count = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
