@@ -99,10 +99,18 @@ message MatchFoundEvent {
   int32 expires_in = 3;
 }
 
+// MatchStatus는 매칭 상태를 나타냅니다.
+enum MatchStatus {
+  MATCH_STATUS_UNSPECIFIED = 0;
+  MATCH_STATUS_SUCCESS = 1;
+  MATCH_STATUS_FAILED = 2;
+  MATCH_STATUS_REJECTED = 3;
+}
+
 message MatchStatusEvent {
   int64 match_id = 1;
-  string status = 2; // "success", "failed", "rejected"
-  string reason = 3;
+  MatchStatus status = 2;
+  string reason = 3;  // 실패/거절 시 상세 이유
 }
 
 message QueueStatusEvent {
@@ -110,9 +118,17 @@ message QueueStatusEvent {
   int32 estimated_wait = 2;
 }
 
+// ExpansionCode는 매칭 조건 확장 코드를 나타냅니다.
+enum ExpansionCode {
+  EXPANSION_CODE_UNSPECIFIED = 0;
+  EXPANSION_CODE_LEVEL_2 = 1;  // EXPANSION_LEVEL_2
+  EXPANSION_CODE_LEVEL_3 = 2;  // EXPANSION_LEVEL_3
+}
+
 message ExpansionChangedEvent {
   int32 previous_level = 1;
   int32 current_level = 2;
-  string code = 3;
+  ExpansionCode code = 3;
   int32 estimated_wait = 4;
 }
+
