@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package duologue.v1;
 
-import "header/v1/header.proto";
+
 
 import "duologue/v1/interest.proto";
 

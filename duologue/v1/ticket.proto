@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+service TicketService {
+  rpc GetMyTickets(GetMyTicketsRequest) returns (GetMyTicketsResponse);
+}
+
+message GetMyTicketsRequest {}
+
+message GetMyTicketsResponse {
+  Ticket match_ticket = 1;
+  Ticket game_ticket = 2;
+  Ticket continue_ticket = 3;
+}
+
+message Ticket {
+  int32 quantity = 1;
+  int32 max_quantity = 2;
+  google.protobuf.Timestamp last_refill_at = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
