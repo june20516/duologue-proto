@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package duologue.v1;
+
+import "duologue/v1/common.proto";
+
+option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+// ==========================================
+// Match Preset Service
+// ==========================================
+
+service MatchPresetService {
+  rpc GetMatchPreset(GetMatchPresetRequest) returns (GetMatchPresetResponse);
+  rpc UpdateMatchPreset(UpdateMatchPresetRequest) returns (UpdateMatchPresetResponse);
+  rpc DeleteMatchPreset(DeleteMatchPresetRequest) returns (DeleteMatchPresetResponse);
+}
+
+// ==========================================
+// Messages
+// ==========================================
+
+message MatchPreset {
+  string preferred_gender = 1; // "male", "female", "any"
+  int32 min_age = 2;
+  int32 max_age = 3;
+  // Add other fields as per models.MatchPreset but keeping it simple for now based on REST
+}
+
+message GetMatchPresetRequest {}
+
+message GetMatchPresetResponse {
+  MatchPreset preset = 1;
+}
+
+message UpdateMatchPresetRequest {
+  string preferred_gender = 1;
+  int32 min_age = 2;
+  int32 max_age = 3;
+}
+
+message UpdateMatchPresetResponse {
+  MatchPreset preset = 1;
+}
+
+message DeleteMatchPresetRequest {}
+
+message DeleteMatchPresetResponse {
+  string message = 1;
+}
