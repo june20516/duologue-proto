@@ -25,6 +25,9 @@ service AuthService {
 
   // User Info
   rpc GetMe(GetMeRequest) returns (GetMeResponse);
+
+  // Account
+  rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
 }
 
 // ==========================================
@@ -97,3 +100,11 @@ message GetMeResponse {
   string email = 2;
   // Add other basic user info as needed
 }
+
+// --- Account ---
+message DeleteAccountRequest {}
+
+message DeleteAccountResponse {
+  string message = 1;
+}
+
