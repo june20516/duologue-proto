@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package duologue.v1;
 
+import "duologue/v1/common.proto";
 import "duologue/v1/profile.proto";
 
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
@@ -45,30 +46,9 @@ message AuthResponse {
 }
 
 message ErrorEvent {
+  reserved 1; // reserved for old string code
   ErrorCode code = 3;
   string message = 2;
-}
-
-enum ErrorCode {
-  ERROR_CODE_UNSPECIFIED = 0;
-  ERROR_CODE_INVALID_PROTOBUF = 1;
-  ERROR_CODE_HANDLER_ERROR = 2;
-  ERROR_CODE_AUTH_TIMEOUT = 3;
-  ERROR_CODE_AUTH_ERROR = 4;
-  ERROR_CODE_AUTH_REQUIRED = 5;
-  ERROR_CODE_INVALID_TOKEN = 6;
-  ERROR_CODE_ALREADY_CONNECTED = 7;
-  ERROR_CODE_PROFILE_ERROR = 8;
-  ERROR_CODE_PROFILE_NOT_FOUND = 9;
-  ERROR_CODE_ALREADY_IN_QUEUE = 10;
-  ERROR_CODE_QUEUE_ERROR = 11;
-  ERROR_CODE_NOT_IN_QUEUE = 12;
-  ERROR_CODE_MATCH_NOT_FOUND = 13;
-  ERROR_CODE_NOT_PARTICIPANT = 14;
-  ERROR_CODE_ACCEPT_ERROR = 15;
-  ERROR_CODE_MATCH_ERROR = 16;
-  ERROR_CODE_REJECT_ERROR = 17;
-  ERROR_CODE_SYSTEM_ERROR = 18;
 }
 
 message PingEvent {}
