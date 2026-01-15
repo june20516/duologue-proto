@@ -3,6 +3,7 @@ syntax = "proto3";
 package duologue.v1;
 
 import "google/protobuf/timestamp.proto";
+import "duologue/v1/common.proto";
 
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
 
@@ -13,6 +14,13 @@ service TicketService {
 message GetMyTicketsRequest {}
 
 message GetMyTicketsResponse {
+  oneof result {
+    GetMyTicketsSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message GetMyTicketsSuccess {
   Ticket match_ticket = 1;
   Ticket game_ticket = 2;
   Ticket continue_ticket = 3;

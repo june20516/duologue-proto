@@ -2,8 +2,7 @@ syntax = "proto3";
 
 package duologue.v1;
 
-
-
+import "duologue/v1/common.proto";
 import "duologue/v1/interest.proto";
 
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
@@ -18,6 +17,13 @@ service ProfileService {
 message GetMyProfileRequest {}
 
 message GetMyProfileResponse {
+  oneof result {
+    GetMyProfileSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message GetMyProfileSuccess {
   Profile profile = 1;
 }
 
@@ -31,6 +37,13 @@ message UpdateMyProfileRequest {
 }
 
 message UpdateMyProfileResponse {
+  oneof result {
+    UpdateMyProfileSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message UpdateMyProfileSuccess {
   Profile profile = 1;
 }
 
@@ -39,6 +52,13 @@ message GetUserProfileRequest {
 }
 
 message GetUserProfileResponse {
+  oneof result {
+    GetUserProfileSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message GetUserProfileSuccess {
   PublicProfile profile = 1;
 }
 
@@ -47,6 +67,13 @@ message CheckNicknameRequest {
 }
 
 message CheckNicknameResponse {
+  oneof result {
+    CheckNicknameSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message CheckNicknameSuccess {
   bool available = 1;
 }
 

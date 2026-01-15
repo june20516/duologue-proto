@@ -30,6 +30,13 @@ message MatchPreset {
 message GetMatchPresetRequest {}
 
 message GetMatchPresetResponse {
+  oneof result {
+    GetMatchPresetSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message GetMatchPresetSuccess {
   MatchPreset preset = 1;
 }
 
@@ -40,11 +47,25 @@ message UpdateMatchPresetRequest {
 }
 
 message UpdateMatchPresetResponse {
+  oneof result {
+    UpdateMatchPresetSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message UpdateMatchPresetSuccess {
   MatchPreset preset = 1;
 }
 
 message DeleteMatchPresetRequest {}
 
 message DeleteMatchPresetResponse {
+  oneof result {
+    DeleteMatchPresetSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message DeleteMatchPresetSuccess {
   string message = 1;
 }

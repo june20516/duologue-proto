@@ -3,6 +3,7 @@ syntax = "proto3";
 package duologue.v1;
 
 import "google/protobuf/timestamp.proto";
+import "duologue/v1/common.proto";
 import "duologue/v1/profile.proto";
 
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
@@ -16,6 +17,13 @@ service MatchService {
 message GetMyMatchesRequest {}
 
 message GetMyMatchesResponse {
+  oneof result {
+    GetMyMatchesSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message GetMyMatchesSuccess {
   repeated MatchDetail matches = 1;
 }
 
@@ -24,6 +32,13 @@ message GetMatchRequest {
 }
 
 message GetMatchResponse {
+  oneof result {
+    GetMatchSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message GetMatchSuccess {
   MatchDetail match = 1;
 }
 
@@ -31,7 +46,14 @@ message DeleteMatchRequest {
   int64 match_id = 1;
 }
 
-message DeleteMatchResponse {}
+message DeleteMatchResponse {
+  oneof result {
+    DeleteMatchSuccess success = 1;
+    Error error = 2;
+  }
+}
+
+message DeleteMatchSuccess {}
 
 message MatchDetail {
   int64 id = 1;
