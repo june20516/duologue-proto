@@ -81,7 +81,7 @@ message MatchingEvent {
 message JoinQueueRequest {
   optional int32 min_age = 1;
   optional int32 max_age = 2;
-  string gender = 3;
+  GenderPreference gender = 3;
   string region = 4;
   repeated int64 interest_ids = 5;
 }

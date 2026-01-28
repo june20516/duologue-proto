@@ -62,3 +62,18 @@ message Date {
   int32 month = 2;
   int32 day = 3;
 }
+
+enum Gender {
+  GENDER_UNSPECIFIED = 0;
+  GENDER_MALE = 1;
+  GENDER_FEMALE = 2;
+  GENDER_OTHERS = 3;
+}
+
+enum GenderPreference {
+  GENDER_PREFERENCE_UNSPECIFIED = 0;
+  GENDER_PREFERENCE_MALE = 1;
+  GENDER_PREFERENCE_FEMALE = 2;
+  GENDER_PREFERENCE_OTHERS = 3;
+  GENDER_PREFERENCE_ANY = 4;
+}

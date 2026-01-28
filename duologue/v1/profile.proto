@@ -3,6 +3,7 @@ syntax = "proto3";
 package duologue.v1;
 
 import "duologue/v1/interest.proto";
+import "duologue/v1/common.proto";
 
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
 
@@ -22,7 +23,7 @@ message GetMyProfileResponse {
 message UpdateMyProfileRequest {
   optional string nickname = 1;
   optional string profile_image_url = 2;
-  optional string gender = 3;
+  Gender gender = 3;
   optional string short_bio = 4;
   optional string region = 5;
   repeated int64 interest_ids = 6;
@@ -53,7 +54,7 @@ message Profile {
   optional string nickname = 2;
   optional string profile_image_url = 3;
   int32 level = 4;
-  optional string gender = 5;
+  Gender gender = 5;
   optional string short_bio = 6;
   optional string region = 7;
   repeated Interest interests = 8;
@@ -66,7 +67,7 @@ message PublicProfile {
   optional string short_bio = 4;
   int32 level = 5;
   int32 age = 6;
-  optional string gender = 7;
+  Gender gender = 7;
   optional string region = 8;
   repeated Interest interests = 9;
 }

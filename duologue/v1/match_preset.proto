@@ -1,8 +1,9 @@
 syntax = "proto3";
 
 package duologue.v1;
-
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
+
+import "duologue/v1/common.proto";
 
 // ==========================================
 // Match Preset Service
@@ -19,7 +20,7 @@ service MatchPresetService {
 // ==========================================
 
 message MatchPreset {
-  string preferred_gender = 1; // "male", "female", "any"
+  GenderPreference preferred_gender = 1;
   int32 min_age = 2;
   int32 max_age = 3;
 }
@@ -31,7 +32,7 @@ message GetMatchPresetResponse {
 }
 
 message UpdateMatchPresetRequest {
-  string preferred_gender = 1;
+  GenderPreference preferred_gender = 1;
   int32 min_age = 2;
   int32 max_age = 3;
 }
