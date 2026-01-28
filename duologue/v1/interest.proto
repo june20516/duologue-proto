@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package duologue.v1;
 
-import "duologue/v1/common.proto";
-
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
 
 // ==========================================
@@ -32,12 +30,5 @@ message GetInterestsRequest {
 }
 
 message GetInterestsResponse {
-  oneof result {
-    GetInterestsSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message GetInterestsSuccess {
   repeated Interest interests = 1;
 }

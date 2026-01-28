@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package duologue.v1;
 
-import "duologue/v1/common.proto";
-
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
 
 // ==========================================
@@ -24,19 +22,11 @@ message MatchPreset {
   string preferred_gender = 1; // "male", "female", "any"
   int32 min_age = 2;
   int32 max_age = 3;
-  // Add other fields as per models.MatchPreset but keeping it simple for now based on REST
 }
 
 message GetMatchPresetRequest {}
 
 message GetMatchPresetResponse {
-  oneof result {
-    GetMatchPresetSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message GetMatchPresetSuccess {
   MatchPreset preset = 1;
 }
 
@@ -47,25 +37,11 @@ message UpdateMatchPresetRequest {
 }
 
 message UpdateMatchPresetResponse {
-  oneof result {
-    UpdateMatchPresetSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message UpdateMatchPresetSuccess {
   MatchPreset preset = 1;
 }
 
 message DeleteMatchPresetRequest {}
 
 message DeleteMatchPresetResponse {
-  oneof result {
-    DeleteMatchPresetSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message DeleteMatchPresetSuccess {
   string message = 1;
 }

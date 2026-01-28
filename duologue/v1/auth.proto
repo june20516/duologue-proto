@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package duologue.v1;
 
-import "duologue/v1/common.proto";
-
 option go_package = "github.com/june20516/duologue-server/gen/go/duologue/v1;duologuev1";
 
 // ==========================================
@@ -40,13 +38,6 @@ message RequestSignupRequest {
 }
 
 message RequestSignupResponse {
-  oneof result {
-    RequestSignupSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message RequestSignupSuccess {
   string message = 1;
 }
 
@@ -56,16 +47,8 @@ message VerifySignupRequest {
 }
 
 message VerifySignupResponse {
-  oneof result {
-    VerifySignupSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message VerifySignupSuccess {
   string access_token = 1;
   string refresh_token = 2;
-  // User info can be added here if needed immediately after signup
 }
 
 // --- Login ---
@@ -74,13 +57,6 @@ message RequestLoginRequest {
 }
 
 message RequestLoginResponse {
-  oneof result {
-    RequestLoginSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message RequestLoginSuccess {
   string message = 1;
 }
 
@@ -90,13 +66,6 @@ message VerifyLoginRequest {
 }
 
 message VerifyLoginResponse {
-  oneof result {
-    VerifyLoginSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message VerifyLoginSuccess {
   string access_token = 1;
   string refresh_token = 2;
 }
@@ -107,13 +76,6 @@ message RefreshAccessTokenRequest {
 }
 
 message RefreshAccessTokenResponse {
-  oneof result {
-    RefreshAccessTokenSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message RefreshAccessTokenSuccess {
   string access_token = 1;
 }
 
@@ -122,13 +84,6 @@ message LogoutRequest {
 }
 
 message LogoutResponse {
-  oneof result {
-    LogoutSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message LogoutSuccess {
   string message = 1;
 }
 
@@ -138,29 +93,13 @@ message GetMeRequest {
 }
 
 message GetMeResponse {
-  oneof result {
-    GetMeSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message GetMeSuccess {
   int64 user_id = 1;
   string email = 2;
-  // Add other basic user info as needed
 }
 
 // --- Account ---
 message DeleteAccountRequest {}
 
 message DeleteAccountResponse {
-  oneof result {
-    DeleteAccountSuccess success = 1;
-    Error error = 2;
-  }
-}
-
-message DeleteAccountSuccess {
   string message = 1;
 }
-
